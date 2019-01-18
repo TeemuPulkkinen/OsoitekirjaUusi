@@ -65,3 +65,4 @@ public class Henkilot {
         this.henkilotunnus = henkilotunnus;
     }
 }
+//testi
