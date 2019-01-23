@@ -10,13 +10,13 @@ package data;
  * @author s1800591
  */
 public class Henkilot {
-    
+
     private String etunimi;
     private String sukunimi;
     private String osoite;
     private int syntymaaika;
     private String henkilotunnus;
-    
+
     public Henkilot(String etunimi, String sukunimi, String osoite, int syntymaaika, String henkilotunnus) {
         this.etunimi = etunimi;
         this.sukunimi = sukunimi;

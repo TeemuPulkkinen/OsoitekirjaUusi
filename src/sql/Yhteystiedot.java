@@ -10,23 +10,25 @@ package sql;
  * @author s1800591
  */
 public class Yhteystiedot {
+
     static String getAjuri() {
-    return "com.mysql.jdbc.Driver";
-  } 
-  
-  static String getUrl() {
-    // muuta tähän oman tietokannan osoite
-    return "jdbc:mysql://10.9.0.60/";
-  }
-  // tähän tulee phpMyAdmin käyttäjätunnus
-  static String getKayttajatunnus() {
-    return "";
-  }
-  
-  static String getSalasana() {
-      // muuta tähän phpMyAdmin salasana kun testaat
-    return "";
-  }
+        return "com.mysql.jdbc.Driver";
+    }
+
+    static String getUrl() {
+        // muuta tähän oman tietokannan osoite
+        return "jdbc:mysql://10.9.0.60/";
+    }
+    // tähän tulee phpMyAdmin käyttäjätunnus
+
+    static String getKayttajatunnus() {
+        return "";
+    }
+
+    static String getSalasana() {
+        // muuta tähän phpMyAdmin salasana kun testaat
+        return "";
+    }
 }
 
 //testiä

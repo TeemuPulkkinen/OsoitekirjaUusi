@@ -10,7 +10,7 @@ package sql;
  * @author s1800591
  */
 public class Henkilolausekkeet {
-    
+
     private String ajuri;
     private String url;
     private String kayttaja;
