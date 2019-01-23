@@ -73,7 +73,6 @@ public class HenkilonLisays extends JFrame {
         pPohja.add(pEtunimi);
         pPohja.add(pSukunimi);
         pPohja.add(pSukunimi);
-        //pIkkuna.add(pOsoite);
         pPohja.add(pSyntymaaika);
         pPohja.add(pHenkilotunnus);
         pPohja.add(pButtonit);
