@@ -34,7 +34,7 @@ public class OsoitteenMuutos extends JFrame {
     //private JPanel pTiedot = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JLabel lbKatu = new JLabel("Katu:");
     private JLabel lbTalonro = new JLabel("Talonumero:");
-    private JLabel lbPostinro = new JLabel("Postiumero:");
+    private JLabel lbPostinro = new JLabel("Postinumero:");
     private JLabel lbKaupunki = new JLabel("Kaupunki:");
     private JTextField tfKatu = new JTextField(15);
     private JTextField tfTalonro = new JTextField(7);
