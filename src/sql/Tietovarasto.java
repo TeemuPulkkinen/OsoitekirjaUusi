@@ -9,7 +9,7 @@ package sql;
  *
  * @author s1800591
  */
-public class Henkilolausekkeet {
+public class Tietovarasto {
 
     private String ajuri;
     private String url;
@@ -31,7 +31,7 @@ public class Henkilolausekkeet {
 
     private String sqlMuutaHenkilonOsoite = "update henkilo set osoite=? where henkilotunnus = ?";
 
-    public Henkilolausekkeet(String ajuri, String url, String kayttaja, String salasana) {
+    public Tietovarasto(String ajuri, String url, String kayttaja, String salasana) {
         this.ajuri = ajuri;
         this.url = url;
         this.kayttaja = kayttaja;

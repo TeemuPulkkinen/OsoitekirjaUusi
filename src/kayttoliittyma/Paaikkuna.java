@@ -65,6 +65,7 @@ public class Paaikkuna extends JFrame {
     private void suoritaLopputoimet() {
         System.exit(0);
     }
+    
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
