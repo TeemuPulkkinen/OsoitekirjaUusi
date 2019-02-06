@@ -26,10 +26,10 @@ public class Paaikkuna extends JFrame {
     private JPanel lisaaHenkiloPaneeli = new JPanel();
     private JPanel muutaOsoitePaneeli = new JPanel();
     private JPanel haeHenkiloPaneeli = new JPanel();
-    private JButton lisaaOsoite = new JButton("Lisää osoite.");
-    private JButton lisaaHenkilo = new JButton("Lisää henkilö.");
-    private JButton muutaOsoite = new JButton("Muuta henkilön osoite.");
-    private JButton haeHenkilo = new JButton("Hae henkilötiedot.");
+    private JButton lisaaHenkilo = new JButton("Lisää henkilö");
+    private JButton lisaaOsoite = new JButton("Lisää osoite");
+    private JButton muutaOsoite = new JButton("Muuta osoitetiedot");
+    private JButton haeHenkilo = new JButton("Hae henkilötiedot");
 
     public Paaikkuna() {
 
@@ -37,13 +37,13 @@ public class Paaikkuna extends JFrame {
 
         ikkuna.setLayout(ikkunaAsettelu);
 
-        ikkuna.add(lisaaOsoitePaneeli);
         ikkuna.add(lisaaHenkiloPaneeli);
+        ikkuna.add(lisaaOsoitePaneeli);
         ikkuna.add(muutaOsoitePaneeli);
         ikkuna.add(haeHenkiloPaneeli);
 
-        lisaaOsoitePaneeli.add(lisaaOsoite);
         lisaaHenkiloPaneeli.add(lisaaHenkilo);
+        lisaaOsoitePaneeli.add(lisaaOsoite);
         muutaOsoitePaneeli.add(muutaOsoite);
         haeHenkiloPaneeli.add(haeHenkilo);
 
