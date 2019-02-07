@@ -79,10 +79,10 @@ public class HenkilonLisays extends JFrame {
         this.add(pPohja);
 
     }
+    // Lisäysikkunat ei enää tarvitse omaa main metodia.
+    //public static void main(String[] args) {
 
-    public static void main(String[] args) {
-
-        HenkilonLisays ikkuna = new HenkilonLisays();
-        ikkuna.setVisible(true);
-    }
+        //HenkilonLisays ikkuna = new HenkilonLisays();
+        //ikkuna.setVisible(true);
+    //}
 }

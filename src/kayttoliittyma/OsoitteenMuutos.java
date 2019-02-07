@@ -83,9 +83,4 @@ public class OsoitteenMuutos extends JFrame {
         this.add(pPohja);
     }
     
-    public static void main(String[] args) {
-        
-        OsoitteenMuutos oikkuna = new OsoitteenMuutos();
-        oikkuna.setVisible(true);
-    }
 }

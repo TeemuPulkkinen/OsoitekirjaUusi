@@ -59,13 +59,65 @@ public class Paaikkuna extends JFrame {
                 suoritaLopputoimet();
             }
         });
+        // liitetään luonti-oliot buttoneihin
+        lisaaHenkilo.addActionListener(new uusiHenkiloIkkuna());
+        lisaaOsoite.addActionListener(new uusiOsoiteIkkuna());
+        muutaOsoite.addActionListener(new uusiOsoitteenMuutosIkkuna());
 
     }
 
     private void suoritaLopputoimet() {
         System.exit(0);
     }
+
+    // Metodi joka luo uuden HenkilonLisays-luokan olion ikkuna
+    private void luoHenkiloIkkuna() {
+
+        HenkilonLisays ikkunaHenkilonLisays = new HenkilonLisays();
+        ikkunaHenkilonLisays.setVisible(true);
+    }
+
+    private void luoOsoiteIkkuna() {
+
+        OsoitteenLisays ikkunaOsoitteenLisays = new OsoitteenLisays();
+        ikkunaOsoitteenLisays.setVisible(true);
+    }
+
+    private void luoOsoitteenMuutosIkkuna() {
+
+        OsoitteenMuutos ikkunaOsoitteenMuutos = new OsoitteenMuutos();
+        ikkunaOsoitteenMuutos.setVisible(true);
+    }
+
+    /* funktio joka hyödyntää luotua luoHenkiloIkkuna-metodia, tämä voidaan liittää
+    buttoniin.   
+     */
+    private class uusiHenkiloIkkuna implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            luoHenkiloIkkuna();
+        }
+    }
+
+    private class uusiOsoiteIkkuna implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            luoOsoiteIkkuna();
+        }
+    }
     
+    private class uusiOsoitteenMuutosIkkuna implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            luoOsoitteenMuutosIkkuna();
+        }
+    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

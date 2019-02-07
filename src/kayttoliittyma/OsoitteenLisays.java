@@ -83,11 +83,7 @@ public class OsoitteenLisays extends JFrame {
         this.add(pPohja);
     }
     
-    public static void main(String[] args) {
-        
-        OsoitteenLisays ikkuna = new OsoitteenLisays();
-        ikkuna.setVisible(true);
-    }
+   
 }
     
 
