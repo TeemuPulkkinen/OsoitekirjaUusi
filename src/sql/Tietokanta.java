@@ -102,3 +102,4 @@ public class Tietokanta {
         kanta.lisaaOsoite(osoite);
     }*/
 
+//testi
