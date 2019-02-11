@@ -64,5 +64,11 @@ public class Henkilot {
     public void setHenkilotunnus(String henkilotunnus) {
         this.henkilotunnus = henkilotunnus;
     }
+
+    @Override
+    public String toString() {
+        return "Henkilot{" + "etunimi=" + etunimi + ", sukunimi=" + sukunimi + ", osoite=" + osoite + ", syntymaaika=" + syntymaaika + ", henkilotunnus=" + henkilotunnus + '}';
+    }
+    
 }
-//testi
+
