@@ -63,6 +63,7 @@ public class Paaikkuna extends JFrame {
         lisaaHenkilo.addActionListener(new uusiHenkiloIkkuna());
         lisaaOsoite.addActionListener(new uusiOsoiteIkkuna());
         muutaOsoite.addActionListener(new uusiOsoitteenMuutosIkkuna());
+        haeHenkilo.addActionListener(new uusiHenkilonHakuIkkuna());
 
     }
 
@@ -88,6 +89,12 @@ public class Paaikkuna extends JFrame {
         OsoitteenMuutos ikkunaOsoitteenMuutos = new OsoitteenMuutos();
         ikkunaOsoitteenMuutos.setVisible(true);
     }
+    
+    private void luoHenkilonHakuIkkuna() {
+        
+        HenkilonHaku ikkunaHenkilonHaku = new HenkilonHaku();
+        ikkunaHenkilonHaku.setVisible(true);
+    }
 
     /* funktio joka hyödyntää luotua luoHenkiloIkkuna-metodia, tämä voidaan liittää
     buttoniin.   
@@ -109,7 +116,7 @@ public class Paaikkuna extends JFrame {
             luoOsoiteIkkuna();
         }
     }
-    
+
     private class uusiOsoitteenMuutosIkkuna implements ActionListener {
 
         @Override
@@ -117,6 +124,16 @@ public class Paaikkuna extends JFrame {
 
             luoOsoitteenMuutosIkkuna();
         }
+    }
+
+    private class uusiHenkilonHakuIkkuna implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+            luoHenkilonHakuIkkuna();
+        }
+
     }
 
     public static void main(String[] args) {

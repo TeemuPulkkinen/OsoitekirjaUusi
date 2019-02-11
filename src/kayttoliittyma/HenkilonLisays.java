@@ -47,7 +47,7 @@ public class HenkilonLisays extends JFrame {
         this.setTitle("Henkilötietojen syöttö");
         this.setSize(400, 250);
         this.setLocation(200, 100);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         asetteleKomponentit();
 
     }
@@ -68,10 +68,13 @@ public class HenkilonLisays extends JFrame {
 
         pButtonit.add(btLisaa);
         pButtonit.add(btPeruuta);
-
+        
+        /*pOsoite.add(lbOsoite);
+        pOsoite.add(tfOsoite);
+        */
         pPohja.add(pEtunimi);
         pPohja.add(pSukunimi);
-        pPohja.add(pSukunimi);
+        //pPohja.add(pOsoite);
         pPohja.add(pSyntymaaika);
         pPohja.add(pHenkilotunnus);
         pPohja.add(pButtonit);

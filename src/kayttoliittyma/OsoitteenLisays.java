@@ -20,27 +20,23 @@ import javax.swing.JTextField;
  * @author s1801210
  */
 public class OsoitteenLisays extends JFrame {
-    //Ulos kommentoidut komponentit voidaan koittaa saada toimimaan tarvittaessa :)
+    
     private JPanel pPohja = new JPanel(new GridLayout(7,1));
     private JPanel pKatu = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel pTalonro = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel pPostinro = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel pKaupunki = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    //private JPanel combo = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel pButtoni = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    //private JPanel pTiedot = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    
     private JLabel lbKatu = new JLabel("Katu:");
     private JLabel lbTalonro = new JLabel("Talonumero:");
     private JLabel lbPostinro = new JLabel("Postinumero:");
     private JLabel lbKaupunki = new JLabel("Kaupunki:");
+    
     private JTextField tfKatu = new JTextField(15);
     private JTextField tfTalonro = new JTextField(7);
     private JTextField tfPostinro = new JTextField(5);
     private JTextField tfKaupunki = new JTextField(15);
-    //private JComboBox osoitteenHenkilo;
-    private JTextArea vanhanOmistajanTiedot = new JTextArea(5, 20);
-    //private JScrollPane rullaavaOmistaja = new JScrollPane(vanhanOmistajanTiedot);
-    private JButton tallenna = new JButton("Tallenna");
 
     private JButton btLisaa = new JButton("Lisää");
     private JButton btPeruuta = new JButton("Peruuta");
@@ -50,7 +46,7 @@ public class OsoitteenLisays extends JFrame {
         this.setTitle("Lisää osoite");
         this.setSize(350, 250);
         this.setLocation(200, 100);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         asetteleKomponentit();
     }
 
@@ -78,7 +74,8 @@ public class OsoitteenLisays extends JFrame {
         
         //pTiedot.add(rullaavaOmistaja);
         
-        pButtoni.add(tallenna);
+        pButtoni.add(btLisaa);
+        pButtoni.add(btPeruuta);
         
         this.add(pPohja);
     }
