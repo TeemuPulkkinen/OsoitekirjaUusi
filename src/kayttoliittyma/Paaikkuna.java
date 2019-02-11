@@ -159,10 +159,10 @@ public class Paaikkuna extends JFrame {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             yhteys = DriverManager.getConnection("jdbc:mysql://10.9.0.60/", "", "");
             String haeKaikkiHenkilotSQL = "select * from Henkilot order by ?";
-            PreparedStatement autonHaku = yhteys.prepareStatement(haeKaikkiHenkilotSQL);
-            autonHaku.setString(1, "etunimi");
+            PreparedStatement haeHenkilo = yhteys.prepareStatement(haeKaikkiHenkilotSQL);
+            haeHenkilo.setString(1, "etunimi");
             // Koska SQL-haussa on tähti, tulokset tulevat ResultSettinä
-            ResultSet hakutulos = autonHaku.executeQuery();
+            ResultSet hakutulos = haeHenkilo.executeQuery();
             
             while(hakutulos.next()) {
                 System.out.println(hakutulos.getString(1)+" "+hakutulos.getString(2)+" "+hakutulos.getString(3)+
