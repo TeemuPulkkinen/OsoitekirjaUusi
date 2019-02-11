@@ -70,10 +70,6 @@ public class OsoitteenLisays extends JFrame {
         pKaupunki.add(lbKaupunki);
         pKaupunki.add(tfKaupunki);
         
-        //combo.add(osoitteenHenkilo);
-        
-        //pTiedot.add(rullaavaOmistaja);
-        
         pButtoni.add(btLisaa);
         pButtoni.add(btPeruuta);
         

@@ -11,12 +11,23 @@ package data;
  */
 public class Osoitteet {
 
+    private int osoiteID;
     private String katu;
     private int talonro;
     private int postinro;
     private String kaupunki;
 
+    public Osoitteet(int osoiteID, String katu, int talonro, int postinro, String kaupunki) {
+
+        this.osoiteID = osoiteID;
+        this.katu = katu;
+        this.talonro = talonro;
+        this.postinro = postinro;
+        this.kaupunki = kaupunki;
+    }
+    
     public Osoitteet(String katu, int talonro, int postinro, String kaupunki) {
+
         this.katu = katu;
         this.talonro = talonro;
         this.postinro = postinro;
@@ -53,6 +64,19 @@ public class Osoitteet {
 
     public void setKaupunki(String kaupunki) {
         this.kaupunki = kaupunki;
+    }
+
+    public int getOsoiteID() {
+        return osoiteID;
+    }
+
+    public void setOsoiteID(int osoiteID) {
+        this.osoiteID = osoiteID;
+    }
+
+    @Override
+    public String toString() {
+        return "Osoitteet{" + "katu=" + katu + ", talonro=" + talonro + ", postinro=" + postinro + ", kaupunki=" + kaupunki + '}';
     }
 
 }
