@@ -28,7 +28,7 @@ public class HenkilonHaku extends JFrame {
     private JTextArea taTiedot = new JTextArea(20,20);
     
     private JButton btHae = new JButton("Hae");
-    private JButton btSulje = new JButton("Sulje");
+    private JButton btPeruuta = new JButton("Peruuta");
 
     public HenkilonHaku() {
         
@@ -53,7 +53,7 @@ public class HenkilonHaku extends JFrame {
         pHenkilonTiedot.add(taTiedot);
         
         pButtoni.add(btHae);
-        pButtoni.add(btSulje);
+        pButtoni.add(btPeruuta);
         
         this.add(pPohja);
     }

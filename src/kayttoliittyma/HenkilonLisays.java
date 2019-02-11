@@ -5,9 +5,14 @@
  */
 package kayttoliittyma;
 
+import data.Henkilot;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Date;
 import javax.swing.*;
+import sql.Tietokanta;
 
 /**
  *
@@ -35,7 +40,7 @@ public class HenkilonLisays extends JFrame {
     private JTextField tfEtunimi = new JTextField(15);
     private JTextField tfSukunimi = new JTextField(15);
     //private JTextField tfOsoite = new JTextField();
-    private JTextField tfSyntymaaika = new JTextField(15);
+    public JTextField tfSyntymaaika = new JTextField(15);
     private JTextField tfHenkilotunnus = new JTextField(15);
 
     //buttonit
@@ -50,6 +55,8 @@ public class HenkilonLisays extends JFrame {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         asetteleKomponentit();
 
+        btLisaa.addActionListener(new kantaanlisaysKuuntelija());
+        btPeruuta.addActionListener(new peruuta());
     }
 
     private void asetteleKomponentit() {
@@ -68,13 +75,9 @@ public class HenkilonLisays extends JFrame {
 
         pButtonit.add(btLisaa);
         pButtonit.add(btPeruuta);
-        
-        /*pOsoite.add(lbOsoite);
-        pOsoite.add(tfOsoite);
-        */
+
         pPohja.add(pEtunimi);
         pPohja.add(pSukunimi);
-        //pPohja.add(pOsoite);
         pPohja.add(pSyntymaaika);
         pPohja.add(pHenkilotunnus);
         pPohja.add(pButtonit);
@@ -82,10 +85,42 @@ public class HenkilonLisays extends JFrame {
         this.add(pPohja);
 
     }
-    // Lisäysikkunat ei enää tarvitse omaa main metodia.
-    //public static void main(String[] args) {
 
-        //HenkilonLisays ikkuna = new HenkilonLisays();
-        //ikkuna.setVisible(true);
-    //}
+    private void lisaaHenkiloKantaan() {
+
+        Tietokanta kanta = new Tietokanta();
+
+        String etunimi = tfEtunimi.getText();
+        String sukunimi = tfSukunimi.getText();
+        //Date syntymapaiva =
+        String henkilotunnus = tfHenkilotunnus.getText();
+
+        Henkilot henkilo = new Henkilot(etunimi, sukunimi, henkilotunnus);
+
+        kanta.lisaaHenkilo(henkilo);
+    }
+
+    private class kantaanlisaysKuuntelija implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            lisaaHenkiloKantaan();
+        }
+
+    }
+
+    private class peruuta implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            suljeIkkuna();
+        }
+
+    }
+
+    private void suljeIkkuna() {
+
+        super.dispose();
+    }
 }

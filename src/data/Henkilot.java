@@ -11,17 +11,27 @@ package data;
  */
 public class Henkilot {
 
+    private int henkiloID;
     private String etunimi;
     private String sukunimi;
-    private String osoite;
-    private int syntymaaika;
+    //private String osoite;
+    private String syntymaaika;
     private String henkilotunnus;
 
-    public Henkilot(String etunimi, String sukunimi, String osoite, int syntymaaika, String henkilotunnus) {
+    public Henkilot(int henkiloID, String etunimi, String sukunimi, String syntymaaika, String henkilotunnus) {
+        
+        this.henkiloID = henkiloID;
         this.etunimi = etunimi;
         this.sukunimi = sukunimi;
-        this.osoite = osoite;
+        //this.osoite = osoite;
         this.syntymaaika = syntymaaika;
+        this.henkilotunnus = henkilotunnus;
+    }
+    
+    public Henkilot(String etunimi, String sukunimi, String henkilotunnus) {
+        
+        this.etunimi = etunimi;
+        this.sukunimi = sukunimi;
         this.henkilotunnus = henkilotunnus;
     }
 
@@ -41,19 +51,19 @@ public class Henkilot {
         this.sukunimi = sukunimi;
     }
 
-    public String getOsoite() {
+    /*public String getOsoite() {
         return osoite;
     }
 
     public void setOsoite(String osoite) {
         this.osoite = osoite;
-    }
+    }*/
 
-    public int getSyntymaaika() {
+    public String getSyntymaaika() {
         return syntymaaika;
     }
 
-    public void setSyntymaaika(int syntymaaika) {
+    public void setSyntymaaika(String syntymaaika) {
         this.syntymaaika = syntymaaika;
     }
 
@@ -67,8 +77,18 @@ public class Henkilot {
 
     @Override
     public String toString() {
-        return "Henkilot{" + "etunimi=" + etunimi + ", sukunimi=" + sukunimi + ", osoite=" + osoite + ", syntymaaika=" + syntymaaika + ", henkilotunnus=" + henkilotunnus + '}';
+        return "Henkilot{" + "etunimi=" + etunimi + ", sukunimi=" + sukunimi + ", syntymaaika=" + syntymaaika + ", henkilotunnus=" + henkilotunnus + '}';
     }
+
+    public int getHenkiloID() {
+        return henkiloID;
+    }
+
+    public void setHenkiloID(int henkiloID) {
+        this.henkiloID = henkiloID;
+    }
+    
+    
     
 }
 

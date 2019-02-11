@@ -5,6 +5,7 @@
  */
 package kayttoliittyma;
 
+import data.Osoitteet;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -49,6 +50,9 @@ public class OsoitteenLisays extends JFrame {
         this.setLocation(200, 100);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         asetteleKomponentit();
+
+        btLisaa.addActionListener(new osoitetiedonLisays());
+        btPeruuta.addActionListener(new peruuta());
     }
 
     private void asetteleKomponentit() {
@@ -89,7 +93,31 @@ public class OsoitteenLisays extends JFrame {
     
     // Tee osoitteen lisäykselle kotitehtävänä oma metodi.
     private void lisaaOsoiteKantaan() {
-        
+
         Tietokanta kanta = new Tietokanta();
+        
+        String katu = tfKatu.getText();
+        int talonro = Integer.parseInt(tfTalonro.getText());
+        int postinro = Integer.parseInt(tfPostinro.getText());
+        String kaupunki = tfKaupunki.getText();
+        
+        Osoitteet osoite = new Osoitteet(katu, talonro, postinro, kaupunki);
+        
+        kanta.lisaaOsoite(osoite);
+    }
+
+    private class peruuta implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            suljeIkkuna();
+        }
+
+    }
+    
+    private void suljeIkkuna() {
+        
+        super.dispose();
     }
 }
