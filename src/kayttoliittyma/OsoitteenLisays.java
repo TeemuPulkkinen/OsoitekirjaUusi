@@ -98,7 +98,7 @@ public class OsoitteenLisays extends JFrame {
         
         String katu = tfKatu.getText();
         int talonro = Integer.parseInt(tfTalonro.getText());
-        int postinro = Integer.parseInt(tfPostinro.getText());
+        String postinro = tfPostinro.getText();
         String kaupunki = tfKaupunki.getText();
         
         Osoitteet osoite = new Osoitteet(katu, talonro, postinro, kaupunki);

@@ -14,22 +14,20 @@ public class Henkilot {
     private int henkiloID;
     private String etunimi;
     private String sukunimi;
-    //private String osoite;
     private String syntymaaika;
     private String henkilotunnus;
 
-    public Henkilot(int henkiloID, String etunimi, String sukunimi, String syntymaaika, String henkilotunnus) {
-        
+    public Henkilot(int henkiloID, String etunimi, String sukunimi, String henkilotunnus) {
+
         this.henkiloID = henkiloID;
         this.etunimi = etunimi;
         this.sukunimi = sukunimi;
-        //this.osoite = osoite;
-        this.syntymaaika = syntymaaika;
+        //this.syntymaaika = syntymaaika;
         this.henkilotunnus = henkilotunnus;
     }
-    
+
     public Henkilot(String etunimi, String sukunimi, String henkilotunnus) {
-        
+
         this.etunimi = etunimi;
         this.sukunimi = sukunimi;
         this.henkilotunnus = henkilotunnus;
@@ -50,14 +48,6 @@ public class Henkilot {
     public void setSukunimi(String sukunimi) {
         this.sukunimi = sukunimi;
     }
-
-    /*public String getOsoite() {
-        return osoite;
-    }
-
-    public void setOsoite(String osoite) {
-        this.osoite = osoite;
-    }*/
 
     public String getSyntymaaika() {
         return syntymaaika;
@@ -87,8 +77,5 @@ public class Henkilot {
     public void setHenkiloID(int henkiloID) {
         this.henkiloID = henkiloID;
     }
-    
-    
-    
-}
 
+}

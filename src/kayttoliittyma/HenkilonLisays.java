@@ -24,7 +24,6 @@ public class HenkilonLisays extends JFrame {
     private JPanel pPohja = new JPanel(new GridLayout(6, 1));
     private JPanel pEtunimi = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel pSukunimi = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    //private JPanel pOsoite = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel pSyntymaaika = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel pHenkilotunnus = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel pButtonit = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -32,14 +31,12 @@ public class HenkilonLisays extends JFrame {
     //labelit
     private JLabel lbEtunimi = new JLabel("Etunimi");
     private JLabel lbSukunimi = new JLabel("Sukunimi");
-    //private JLabel lbOsoite = new JLabel("Osoite");
     private JLabel lbSyntymaaika = new JLabel("Syntymäaika");
     private JLabel lbHenkilotunnus = new JLabel("Henkilötunnus");
 
     //text fieldit
     private JTextField tfEtunimi = new JTextField(15);
     private JTextField tfSukunimi = new JTextField(15);
-    //private JTextField tfOsoite = new JTextField();
     public JTextField tfSyntymaaika = new JTextField(15);
     private JTextField tfHenkilotunnus = new JTextField(15);
 

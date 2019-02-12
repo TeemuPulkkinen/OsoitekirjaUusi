@@ -14,10 +14,10 @@ public class Osoitteet {
     private int osoiteID;
     private String katu;
     private int talonro;
-    private int postinro;
+    private String postinro;
     private String kaupunki;
 
-    public Osoitteet(int osoiteID, String katu, int talonro, int postinro, String kaupunki) {
+    public Osoitteet(int osoiteID, String katu, int talonro, String postinro, String kaupunki) {
 
         this.osoiteID = osoiteID;
         this.katu = katu;
@@ -26,7 +26,7 @@ public class Osoitteet {
         this.kaupunki = kaupunki;
     }
     
-    public Osoitteet(String katu, int talonro, int postinro, String kaupunki) {
+    public Osoitteet(String katu, int talonro, String postinro, String kaupunki) {
 
         this.katu = katu;
         this.talonro = talonro;
@@ -50,11 +50,11 @@ public class Osoitteet {
         this.talonro = talonro;
     }
 
-    public int getPostinro() {
+    public String getPostinro() {
         return postinro;
     }
 
-    public void setPostinro(int postinro) {
+    public void setPostinro(String postinro) {
         this.postinro = postinro;
     }
 

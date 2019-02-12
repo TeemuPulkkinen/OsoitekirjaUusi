@@ -18,7 +18,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -71,7 +70,7 @@ public class OsoitteenMuutos extends JFrame {
             ResultSet hakutulos = haeHenkiloKannasta.executeQuery();
 
             while (hakutulos.next()) {
-                cbHenkilo.addItem(hakutulos.getString(1) + " " + hakutulos.getString(2) + " " + hakutulos.getString(3));
+                cbHenkilo.addItem(hakutulos.getString(2) + " " + hakutulos.getString(3));
             }
 
         } catch (Exception e) {
@@ -79,6 +78,7 @@ public class OsoitteenMuutos extends JFrame {
             System.out.println("Tapahtui virhe " + e);
             e.printStackTrace();
         }
+        btTallenna.addActionListener(new TallennaTiedot());
         btPeruuta.addActionListener(new Peruuta());
     }
 
@@ -112,6 +112,30 @@ public class OsoitteenMuutos extends JFrame {
         pButtoni.add(btPeruuta);
 
         this.add(pPohja);
+
+    }
+
+    private class TallennaTiedot implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            tietojenTallennus();
+
+        }
+
+    }
+
+    private void tietojenTallennus() {
+            
+        //luoda yhteys tietokantaan
+        
+        // lukee cbHenkilo-boxissa olevan henkilön
+        
+        // Jos cbHenkilo-boxissa on valittu henkilö, niin syötetyt tiedot
+        // tallentuvat kyseisen henkilön tietokantariville.
+        
+        
     }
 
     private class Peruuta implements ActionListener {
