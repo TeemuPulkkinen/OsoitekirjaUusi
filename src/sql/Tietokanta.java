@@ -8,10 +8,10 @@ package sql;
 import data.Henkilot;
 import data.Osoitteet;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.text.SimpleDateFormat;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,7 +20,8 @@ import java.text.SimpleDateFormat;
 public class Tietokanta {
 
     private String uusiOsoiteSQL = "insert into Osoitteet(katu,talonro,postinro,kaupunki) values(?,?,?,?)";
-    private String uusiHenkiloSQL = "insert into Henkilot(etunimi,sukunimi,henkilotunnus) values(?,?,?)";
+    private String uusiHenkiloSQL = "insert into Henkilot(etunimi,sukunimi,syntymaaika,henkilotunnus) values(?,?,?,?)";
+    private String haeHenkilonTiedotSQL = "select * from Henkilot order by ?";
 
     public void lisaaOsoite(Osoitteet osoite) {
         Connection yhteys = null;
@@ -60,15 +61,10 @@ public class Tietokanta {
 
             PreparedStatement henkilonLisays = yhteys.prepareStatement(uusiHenkiloSQL);
 
-            // Muutetaan String-muotoinen päivämäärä Date-tyypiksi
-            /*String syntymaaika = "2018-01-20";
-            Date utilDate = (Date) new SimpleDateFormat("yyyy-MM-dd").parse(syntymaaika);
-            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-             */
             henkilonLisays.setString(1, henkilo.getEtunimi());
             henkilonLisays.setString(2, henkilo.getSukunimi());
-            //henkilonLisays.setDate(3, sqlDate);
-            henkilonLisays.setString(3, henkilo.getHenkilotunnus());
+            henkilonLisays.setString(3, henkilo.getSyntymaaika());
+            henkilonLisays.setString(4, henkilo.getHenkilotunnus());
 
             henkilonLisays.executeUpdate();
 
@@ -78,4 +74,69 @@ public class Tietokanta {
         }
     }
 
+    public ArrayList<Henkilot> henkilonTietojenHaku(Henkilot henkiloTulos) {
+        
+        ArrayList<Henkilot> haetut = new ArrayList();
+        
+        Connection yhteys = null;
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            yhteys = DriverManager.getConnection("jdbc:mysql://10.9.0.60/", "", "");
+            
+            PreparedStatement haeHenkiloKannasta = yhteys.prepareStatement(haeHenkilonTiedotSQL);
+            haeHenkiloKannasta.setInt(1, henkiloTulos.getHenkiloID());
+            // Koska SQL-haussa on tähti, tulokset tulevat ResultSettinä
+            ResultSet hakutulos = haeHenkiloKannasta.executeQuery();
+            
+            while (hakutulos.next()) {
+                
+                String etunimiHaku = hakutulos.getString("etunimi");
+                S talonroHaku = hakutulos.getInt("talonro");
+                String postinroHaku = hakutulos.getString("postinro");
+                String kaupunkiHaku = hakutulos.getString("kaupunki");
+
+                String henkiloTulos = katuHaku + " " + talonroHaku + " " + postinroHaku + " " + kaupunkiHaku;
+            }
+
+        } catch (Exception e) {
+
+            System.out.println("Tapahtui virhe " + e);
+            e.printStackTrace();
+        }
+        return haetut;
+    }
+
+    public void henkilonOsoitteenHaku() {
+
+        Connection yhteys = null;
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            yhteys = DriverManager.getConnection("jdbc:mysql://10.9.0.60/", "", "");
+            String st = "select * from Osoitteet order by ?";
+            PreparedStatement haeOsoiteKannasta = yhteys.prepareStatement(st);
+            haeOsoiteKannasta.setString(1, "katu");
+            // Koska SQL-haussa on tähti, tulokset tulevat ResultSettinä
+            ResultSet hakutulos = haeOsoiteKannasta.executeQuery();
+
+            while (hakutulos.next()) {
+
+                String katuHaku = hakutulos.getString("katu");
+                int talonroHaku = hakutulos.getInt("talonro");
+                String postinroHaku = hakutulos.getString("postinro");
+                String kaupunkiHaku = hakutulos.getString("kaupunki");
+
+                String henkiloTulos = katuHaku + " " + talonroHaku + " " + postinroHaku + " " + kaupunkiHaku;
+
+                //taOsoitteenTiedot.setText(henkiloTulos);
+
+            }
+
+        } catch (Exception e) {
+
+            System.out.println("Tapahtui virhe " + e);
+            e.printStackTrace();
+        }
+    }
 }

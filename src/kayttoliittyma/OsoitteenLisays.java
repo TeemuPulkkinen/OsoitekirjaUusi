@@ -104,6 +104,11 @@ public class OsoitteenLisays extends JFrame {
         Osoitteet osoite = new Osoitteet(katu, talonro, postinro, kaupunki);
         
         kanta.lisaaOsoite(osoite);
+        
+        tfKatu.setText("");
+        tfTalonro.setText("");
+        tfPostinro.setText("");
+        tfKaupunki.setText("");
     }
 
     private class peruuta implements ActionListener {

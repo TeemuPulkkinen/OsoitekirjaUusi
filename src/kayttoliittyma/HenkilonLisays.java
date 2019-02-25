@@ -10,7 +10,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
+import java.util.Date;
 import javax.swing.*;
 import sql.Tietokanta;
 
@@ -89,12 +89,17 @@ public class HenkilonLisays extends JFrame {
 
         String etunimi = tfEtunimi.getText();
         String sukunimi = tfSukunimi.getText();
-        //Date syntymapaiva =
+        String syntymaaika = tfSyntymaaika.getText();
         String henkilotunnus = tfHenkilotunnus.getText();
 
-        Henkilot henkilo = new Henkilot(etunimi, sukunimi, henkilotunnus);
+        Henkilot henkilo = new Henkilot(etunimi, sukunimi, syntymaaika, henkilotunnus);
 
         kanta.lisaaHenkilo(henkilo);
+        
+        tfEtunimi.setText("");
+        tfSukunimi.setText("");
+        tfSyntymaaika.setText("");
+        tfHenkilotunnus.setText("");
     }
 
     private class kantaanlisaysKuuntelija implements ActionListener {

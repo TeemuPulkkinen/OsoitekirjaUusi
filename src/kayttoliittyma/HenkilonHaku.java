@@ -12,27 +12,32 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.LinkedList;
 import javax.swing.*;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import sql.Tietokanta;
 
 /**
  *
  * @author s1800591
  */
 public class HenkilonHaku extends JFrame {
-
+    
+    Tietokanta kanta = new Tietokanta();
+    
     private JPanel pPohja = new JPanel(new GridLayout(5, 1));
     private JPanel pHenkilovalinta = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel pHenkilonTiedot = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    private JPanel pOsoitteenTiedot = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private JPanel pButtoni = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
     private JLabel lbHenkilovalinta = new JLabel("Valitse henkilö:");
-    private JLabel lbTiedot = new JLabel("Tässä henkilön tiedot:");
+    private JLabel lbHenkilonTiedot = new JLabel("Tässä henkilön tiedot:");
+    private JLabel lbOsoitteenTiedot = new JLabel("Tässä henkilön osoite:");
 
     private JComboBox cbHenkilo = new JComboBox();
 
-    private JTextArea taTiedot = new JTextArea(20, 20);
+    private JTextArea taHenkilonTiedot = new JTextArea(20, 20);
+    private JTextArea taOsoitteenTiedot = new JTextArea(20,20);
 
     private JButton btHae = new JButton("Hae");
     private JButton btPeruuta = new JButton("Peruuta");
@@ -75,14 +80,18 @@ public class HenkilonHaku extends JFrame {
 
         pPohja.add(pHenkilovalinta);
         pPohja.add(pHenkilonTiedot);
+        pPohja.add(pOsoitteenTiedot);
         pPohja.add(pButtoni);
 
         pHenkilovalinta.add(lbHenkilovalinta);
         pHenkilovalinta.add(cbHenkilo);
         cbHenkilo.setPrototypeDisplayValue("Tähän tulee henkilön nimi");
 
-        pHenkilonTiedot.add(lbTiedot);
-        pHenkilonTiedot.add(taTiedot);
+        pHenkilonTiedot.add(lbHenkilonTiedot);
+        pHenkilonTiedot.add(taHenkilonTiedot);
+        
+        pOsoitteenTiedot.add(lbOsoitteenTiedot);
+        pOsoitteenTiedot.add(taOsoitteenTiedot);
 
         pButtoni.add(btHae);
         pButtoni.add(btPeruuta);
@@ -95,43 +104,12 @@ public class HenkilonHaku extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            tietojenHaku();
+            taHenkilonTiedot.setText(kanta.henkilonTietojenHaku());
+            //henkilonOsoitteenHaku();
         }
 
     }
 
-    public void tietojenHaku() {
-
-        Connection yhteys = null;
-        try {
-
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            yhteys = DriverManager.getConnection("jdbc:mysql://10.9.0.60/", "", "");
-            String st = "select * from Henkilot order by ?";
-            PreparedStatement haeHenkiloKannasta = yhteys.prepareStatement(st);
-            haeHenkiloKannasta.setString(1, "etunimi");
-            // Koska SQL-haussa on tähti, tulokset tulevat ResultSettinä
-            ResultSet hakutulos = haeHenkiloKannasta.executeQuery();
-
-            while (hakutulos.next()) {
-
-                String etunimiHaku = hakutulos.getString("etunimi");
-                String sukunimiHaku = hakutulos.getString("sukunimi");
-                // Date syntymaaika
-                String henkilotunnusHaku = hakutulos.getString("henkilotunnus");
-
-                String tulos = etunimiHaku + " " + sukunimiHaku + " " + henkilotunnusHaku;
-
-                taTiedot.setText(tulos);
-
-            }
-
-        } catch (Exception e) {
-
-            System.out.println("Tapahtui virhe " + e);
-            e.printStackTrace();
-        }
-    }
 
     private class Peruuta implements ActionListener {
 
