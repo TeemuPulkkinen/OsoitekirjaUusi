@@ -78,5 +78,5 @@ public class Osoitteet {
     public String toString() {
         return "Osoitteet{" + "katu=" + katu + ", talonro=" + talonro + ", postinro=" + postinro + ", kaupunki=" + kaupunki + '}';
     }
-
+    //testi
 }
