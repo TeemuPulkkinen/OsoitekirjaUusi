@@ -12,6 +12,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Arrays;
+import kayttoliittyma.HenkilonHaku;
 
 /**
  *
@@ -22,6 +24,7 @@ public class Tietokanta {
     private String uusiOsoiteSQL = "insert into Osoitteet(katu,talonro,postinro,kaupunki) values(?,?,?,?)";
     private String uusiHenkiloSQL = "insert into Henkilot(etunimi,sukunimi,syntymaaika,henkilotunnus) values(?,?,?,?)";
     private String haeHenkilonTiedotSQL = "select * from Henkilot order by ?";
+    private String haeHenkilotBoxiinSQL = "select henkiloID, etunimi, sukunimi, syntymaaika, henkilotunnus from Henkilot order by ?";
 
     public void lisaaOsoite(Osoitteet osoite) {
         Connection yhteys = null;
@@ -75,28 +78,28 @@ public class Tietokanta {
     }
 
     public ArrayList<Henkilot> henkilonTietojenHaku(Henkilot henkiloTulos) {
-        
+
         ArrayList<Henkilot> haetut = new ArrayList();
-        
+
         Connection yhteys = null;
         try {
 
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             yhteys = DriverManager.getConnection("jdbc:mysql://10.9.0.60/", "", "");
-            
+
             PreparedStatement haeHenkiloKannasta = yhteys.prepareStatement(haeHenkilonTiedotSQL);
             haeHenkiloKannasta.setInt(1, henkiloTulos.getHenkiloID());
             // Koska SQL-haussa on tähti, tulokset tulevat ResultSettinä
             ResultSet hakutulos = haeHenkiloKannasta.executeQuery();
-            
-            while (hakutulos.next()) {
-                
-                String etunimiHaku = hakutulos.getString("etunimi");
-                S talonroHaku = hakutulos.getInt("talonro");
-                String postinroHaku = hakutulos.getString("postinro");
-                String kaupunkiHaku = hakutulos.getString("kaupunki");
 
-                String henkiloTulos = katuHaku + " " + talonroHaku + " " + postinroHaku + " " + kaupunkiHaku;
+            while (hakutulos.next()) {
+
+                String etunimiHaku = hakutulos.getString("etunimi");
+                String sukunimiHaku = hakutulos.getString("sukunimi");
+                String syntymaaikaHaku = hakutulos.getString("syntymäaika");
+                String henkilotunnusHaku = hakutulos.getString("henkilötunnus");
+
+                //String henkiloTulos = katuHaku + " " + talonroHaku + " " + postinroHaku + " " + kaupunkiHaku;
             }
 
         } catch (Exception e) {
@@ -130,7 +133,6 @@ public class Tietokanta {
                 String henkiloTulos = katuHaku + " " + talonroHaku + " " + postinroHaku + " " + kaupunkiHaku;
 
                 //taOsoitteenTiedot.setText(henkiloTulos);
-
             }
 
         } catch (Exception e) {
@@ -138,5 +140,39 @@ public class Tietokanta {
             System.out.println("Tapahtui virhe " + e);
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<Henkilot> haeHenkilotBoxiin() {
+        
+        ArrayList<Henkilot> haetut = new ArrayList<>();
+        
+        Connection yhteys = null;
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            yhteys = DriverManager.getConnection("jdbc:mysql://10.9.0.60/", "", "");
+            
+            PreparedStatement haeHenkiloKannasta = yhteys.prepareStatement(haeHenkilotBoxiinSQL);
+            haeHenkiloKannasta.setString(1, "etunimi");
+            //haeHenkiloKannasta.setInt(2, Integer.parseInt("henkiloID"));
+            // Koska SQL-haussa on tähti, tulokset tulevat ResultSettinä
+            ResultSet hakutulos = haeHenkiloKannasta.executeQuery();
+
+            while (hakutulos.next()) {
+                
+                Henkilot haetutHenkilot = new Henkilot(hakutulos.getInt(1), hakutulos.getString(2),
+                hakutulos.getString(3), hakutulos.getString(4), hakutulos.getString(5));
+                        
+                haetut.add(haetutHenkilot);
+            }
+
+        } catch (Exception e) {
+
+            System.out.println("Tapahtui virhe " + e);
+            e.printStackTrace();
+        }
+        
+        return haetut;
+
     }
 }

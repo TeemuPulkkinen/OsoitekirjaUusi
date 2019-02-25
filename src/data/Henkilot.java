@@ -72,7 +72,7 @@ public class Henkilot {
 
     @Override
     public String toString() {
-        return "Henkilot{" + "etunimi=" + etunimi + ", sukunimi=" + sukunimi + ", syntymaaika=" + syntymaaika + ", henkilotunnus=" + henkilotunnus + '}';
+        return (String) etunimi +" "+ sukunimi;
     }
 
     public int getHenkiloID() {
