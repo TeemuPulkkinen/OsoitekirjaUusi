@@ -5,10 +5,6 @@
  */
 package data;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  *
  * @author s1800591
@@ -19,6 +15,7 @@ public class Henkilot {
     private String etunimi;
     private String sukunimi;
     private String syntymaaika;
+    private int osoite;
     private String henkilotunnus;
 
     public Henkilot(int henkiloID, String etunimi, String sukunimi, String syntymaaika, String henkilotunnus) {
@@ -37,6 +34,7 @@ public class Henkilot {
         this.syntymaaika = syntymaaika;
         this.henkilotunnus = henkilotunnus;
     }
+    
 
     public String getEtunimi() {
         return etunimi;
@@ -83,4 +81,13 @@ public class Henkilot {
         this.henkiloID = henkiloID;
     }
 
+    public int getOsoite() {
+        return osoite;
+    }
+
+    public void setOsoite(int osoite) {
+        this.osoite = osoite;
+    }
+    
+    
 }

@@ -24,7 +24,9 @@ public class Tietokanta {
     private String uusiOsoiteSQL = "insert into Osoitteet(katu,talonro,postinro,kaupunki) values(?,?,?,?)";
     private String uusiHenkiloSQL = "insert into Henkilot(etunimi,sukunimi,syntymaaika,henkilotunnus) values(?,?,?,?)";
     private String haeHenkilonTiedotSQL = "select * from Henkilot order by ?";
-    private String haeHenkilotBoxiinSQL = "select henkiloID, etunimi, sukunimi, syntymaaika, henkilotunnus from Henkilot order by ?";
+    private String haeHenkilotListaanSQL = "select henkiloID, etunimi, sukunimi, syntymaaika, henkilotunnus from Henkilot order by ?";
+    private String haeOsoitteetListaanSQL = "select osoiteID, katu, talonro, postinro, kaupunki from Osoitteet order by ?";
+    private String yhdistaHenkiloJaOsoiteSQL = "update Henkilot set osoite = ? where henkiloID = ?";
 
     public void lisaaOsoite(Osoitteet osoite) {
         Connection yhteys = null;
@@ -53,10 +55,6 @@ public class Tietokanta {
 
     public void lisaaHenkilo(Henkilot henkilo) {
         Connection yhteys = null;
-        /*
-    Tehdään try-catch rakenne, joka testaa onko tietokantayhteydessä ongelmia
-    try-kohta kertoo mitä yritetään tehdä. Catch kertoo mitä tehdään jos ei onnistu.
-         */
 
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -75,6 +73,29 @@ public class Tietokanta {
             System.out.println("Tapahtui virhe " + e);
             e.printStackTrace();
         }
+    }
+    
+    public void yhdistaHenkiloJaOsoite(Osoitteet osoite, Henkilot henkilo) {
+        
+        Connection yhteys = null;
+        try {
+            
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            yhteys = DriverManager.getConnection("jdbc:mysql://10.9.0.60/", "", "");
+            
+            PreparedStatement henkilonJaOsoitteenYhdistaminen = yhteys.prepareStatement(yhdistaHenkiloJaOsoiteSQL); 
+            henkilonJaOsoitteenYhdistaminen.setInt(1, osoite.getOsoiteID());
+            henkilonJaOsoitteenYhdistaminen.setInt(2, henkilo.getHenkiloID());
+            
+            henkilonJaOsoitteenYhdistaminen.executeUpdate();
+            
+            
+        } catch (Exception e) {
+
+            System.out.println("Tapahtui virhe " + e);
+            e.printStackTrace();
+        }
+        
     }
 
     public ArrayList<Henkilot> henkilonTietojenHaku(Henkilot henkiloTulos) {
@@ -110,29 +131,30 @@ public class Tietokanta {
         return haetut;
     }
 
-    public void henkilonOsoitteenHaku() {
+    public ArrayList<Osoitteet> haeOsoitteetListaan() {
+
+        ArrayList osoiteLista = new ArrayList<>();
 
         Connection yhteys = null;
         try {
 
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             yhteys = DriverManager.getConnection("jdbc:mysql://10.9.0.60/", "", "");
-            String st = "select * from Osoitteet order by ?";
-            PreparedStatement haeOsoiteKannasta = yhteys.prepareStatement(st);
-            haeOsoiteKannasta.setString(1, "katu");
-            // Koska SQL-haussa on tähti, tulokset tulevat ResultSettinä
-            ResultSet hakutulos = haeOsoiteKannasta.executeQuery();
+
+            PreparedStatement haeOsoitteetListaan = yhteys.prepareStatement(haeOsoitteetListaanSQL);
+            haeOsoitteetListaan.setString(1, "katu");
+
+            ResultSet hakutulos = haeOsoitteetListaan.executeQuery();
 
             while (hakutulos.next()) {
 
-                String katuHaku = hakutulos.getString("katu");
-                int talonroHaku = hakutulos.getInt("talonro");
-                String postinroHaku = hakutulos.getString("postinro");
-                String kaupunkiHaku = hakutulos.getString("kaupunki");
+                while (hakutulos.next()) {
 
-                String henkiloTulos = katuHaku + " " + talonroHaku + " " + postinroHaku + " " + kaupunkiHaku;
+                    Osoitteet haetutOsoitteet = new Osoitteet(hakutulos.getInt(1), hakutulos.getString(2),
+                            hakutulos.getInt(3), hakutulos.getString(4), hakutulos.getString(5));
 
-                //taOsoitteenTiedot.setText(henkiloTulos);
+                    osoiteLista.add(haetutOsoitteet);
+                }
             }
 
         } catch (Exception e) {
@@ -140,29 +162,29 @@ public class Tietokanta {
             System.out.println("Tapahtui virhe " + e);
             e.printStackTrace();
         }
+        return osoiteLista;
     }
 
-    public ArrayList<Henkilot> haeHenkilotBoxiin() {
-        
+    public ArrayList<Henkilot> haeHenkilotListaan() {
+
         ArrayList<Henkilot> haetut = new ArrayList<>();
-        
+
         Connection yhteys = null;
         try {
 
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             yhteys = DriverManager.getConnection("jdbc:mysql://10.9.0.60/", "", "");
-            
-            PreparedStatement haeHenkiloKannasta = yhteys.prepareStatement(haeHenkilotBoxiinSQL);
+
+            PreparedStatement haeHenkiloKannasta = yhteys.prepareStatement(haeHenkilotListaanSQL);
             haeHenkiloKannasta.setString(1, "etunimi");
-            //haeHenkiloKannasta.setInt(2, Integer.parseInt("henkiloID"));
-            // Koska SQL-haussa on tähti, tulokset tulevat ResultSettinä
+            
             ResultSet hakutulos = haeHenkiloKannasta.executeQuery();
 
             while (hakutulos.next()) {
-                
+
                 Henkilot haetutHenkilot = new Henkilot(hakutulos.getInt(1), hakutulos.getString(2),
-                hakutulos.getString(3), hakutulos.getString(4), hakutulos.getString(5));
-                        
+                        hakutulos.getString(3), hakutulos.getString(4), hakutulos.getString(5));
+
                 haetut.add(haetutHenkilot);
             }
 
@@ -171,8 +193,9 @@ public class Tietokanta {
             System.out.println("Tapahtui virhe " + e);
             e.printStackTrace();
         }
-        
+
         return haetut;
 
     }
+    
 }

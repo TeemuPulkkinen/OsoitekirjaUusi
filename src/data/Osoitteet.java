@@ -34,6 +34,9 @@ public class Osoitteet {
         this.kaupunki = kaupunki;
     }
 
+    
+
+
     public String getKatu() {
         return katu;
     }
@@ -76,7 +79,7 @@ public class Osoitteet {
 
     @Override
     public String toString() {
-        return "Osoitteet{" + "katu=" + katu + ", talonro=" + talonro + ", postinro=" + postinro + ", kaupunki=" + kaupunki + '}';
+        return (String) katu + " " + talonro + " " + postinro + " " + kaupunki;
     }
     //testi
 }

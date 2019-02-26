@@ -46,7 +46,7 @@ public class HenkilonHaku extends JFrame {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         asetteleKomponentit();
         
-        cbHenkilo.setModel(new DefaultComboBoxModel(kanta.haeHenkilotBoxiin().toArray()));
+        cbHenkilo.setModel(new DefaultComboBoxModel(kanta.haeHenkilotListaan().toArray()));
         
         btHae.addActionListener(new HaeTiedot());
         btPeruuta.addActionListener(new Peruuta());
